@@ -1,13 +1,12 @@
 <template>
   <div>
     <layOut>
-      <div>
-        main area and tags
-        <ul class="tags">
-          <li class="current">衣</li>
-          <li class="current">食</li>
-          <li class="current">住</li>
-          <li class="current">行</li>
+      <div class="tags">
+        <ul class="current">
+          <li>衣</li>
+          <li>食</li>
+          <li>住</li>
+          <li>行</li>
         </ul>
         <div class="new"><button>新增标签</button></div>
       </div>
@@ -41,4 +40,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tags {
+  font-size: 14px;
+  padding: 16px;
+  .current {
+    display: flex;
+    li {
+      background: rgba(153, 153, 153, 0.45);
+      $h: 24px;
+      border-radius: ($h/2);
+      line-height: $h;
+      padding: 0 16px;
+      margin-right: 12px;
+    }
+  }
+  .new {
+    margin-top: 16px;
+    button {
+      color: #999;
+      outline: none;
+      border: none;
+      background: transparent;
+      border-bottom: 1px solid;
+      padding: 0 3px;
+    }
+  }
+}
 </style>
