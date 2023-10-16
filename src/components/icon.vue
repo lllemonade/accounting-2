@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <svg class="icon">
@@ -22,10 +23,10 @@ export default {
 
 <style lang="scss" scoped>
 .icon {
-  width: 1em;
-  height: 1em;
+  width: 2em;
+  height: 2em;
   vertical-align: -0.15em;
-  fill: #000;
+  fill: currentColor;
   overflow: hidden;
 }
 </style>
