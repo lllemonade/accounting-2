@@ -18,12 +18,12 @@ const routes: Array<RouteConfig> = [
     component: Money
   },
   {
-    path: '/Labels',
+    path: '/labels',
     name: 'labels',
     component: Labels
   },
   {
-    path: '/Statistics',
+    path: '/statistics',
     name: 'statistics',
     component: Statistics
   },
