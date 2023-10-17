@@ -18,24 +18,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "types",
-  data() {
-    return {
-      //支出和收入inCome
-      type: "payOut",
-    };
-  },
-  methods: {
-    classType(type) {
-      if (type !== "payOut" && type !== "inCome") {
-        throw new Error("type is unknow");
-      }
-      this.type = type;
-    },
-  },
-};
+<script lang="ts">
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+
+@Component
+export default class types extends Vue {
+  type = "payOut";
+  classType(type: string) {
+    if (type !== "payOut" && type !== "inCome") {
+      throw new Error("type is unknow");
+    }
+    this.type = type;
+  }
+}
 </script>
 
 <style lang="scss" scoped>

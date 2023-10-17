@@ -7,7 +7,7 @@
   </layOut>
 </template>
 
-<script>
+<script lang="ts">
 import types from "../components/types.vue";
 import notes from "../components/notes.vue";
 import numberPad from "../components/numberPad.vue";
@@ -18,7 +18,3 @@ export default {
   components: { types, notes, numberPad, tags },
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../assets/style/helper.scss";
-</style>
