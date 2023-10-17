@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "layOut",
 };
@@ -19,6 +19,8 @@ export default {
   flex-direction: column;
   height: 100vh;
   > .content {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
   }
 }

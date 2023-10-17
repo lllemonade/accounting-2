@@ -1,10 +1,8 @@
 
 <template>
-  <div>
-    <svg class="icon">
-      <use :xlink:href="'#' + name"></use>
-    </svg>
-  </div>
+  <svg class="icon">
+    <use :xlink:href="'#' + name"></use>
+  </svg>
 </template>
 
 <script lang = "ts">
