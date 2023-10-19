@@ -9,24 +9,24 @@
       <button @click="inputContent">4</button>
       <button @click="inputContent">5</button>
       <button @click="inputContent">6</button>
-      <button>+</button>
+      <button @click="add">+</button>
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
-      <button>-</button>
+      <button @click="min">-</button>
       <button @click="inputContent">.</button>
       <button @click="inputContent">0</button>
       <button @click="remove">
         <icon name="delete" />
       </button>
-      <button class="ok">完成</button>
+      <button class="ok" @click="ok">完成</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 
 @Component
 export default class numberPad extends Vue {
@@ -45,18 +45,26 @@ export default class numberPad extends Vue {
     }
     if (this.output.indexOf('.') > 0 && input === '.') { return; }
     this.output += input;
-  }
+  };
   remove() {
     if (this.output.length === 1) {
       this.output = '0'
     } else { this.output = this.output.slice(0, -1) }
+  };
+  add() { };
+  min() { };
+  ok() {
+    this.$emit('update:value', this.output)
   }
-
+  // @Watch('output')
+  // onOutPutChange(Value: string) {
+  //   this.$emit('update:value', Value)
+  // }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/style/helper.scss";
+@import "../../assets/style/helper.scss";
 
 .numberPad {
   .total {

@@ -3,14 +3,14 @@
   <div>
     <label class="notes">
       <span class="name">备注</span>
-      <input type="text" v-model="value" placeholder="在这里添加备注" />
+      <input type="text" v-model.lazy="value" placeholder="在这里添加备注" />
     </label>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from "vue-property-decorator";
+import { Component, Watch } from "vue-property-decorator";
 
 @Component
 export default class notes extends Vue {
@@ -19,6 +19,10 @@ export default class notes extends Vue {
   //   const input = event.target as HTMLInputElement;
   //   this.value = input.value
   // }
+  @Watch('value')
+  onValueChange(value: string) {
+    this.$emit('update:value', value)
+  }
 }
 </script>
 

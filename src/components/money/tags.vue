@@ -2,11 +2,10 @@
   <div class="tags">
     <div class="scrollArea">
       <ul class="tagList">
-        <li>衣</li>
-        <li>食</li>
-        <li>住</li>
-        <li>行</li>
-        <li class="new">
+        <li v-for="tag in tagsData" :key="tag" :class="{ selected: value.indexOf(tag) >= 0 }" @click="select(tag)">
+          {{ tag }}
+        </li>
+        <li class="new" @click="createTag">
           <icon name="add" />
         </li>
       </ul>
@@ -16,16 +15,42 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
-@Component
+import { Component, Prop } from 'vue-property-decorator'
 
+@Component
 export default class tags extends Vue {
+  // 总的tags数组
+  @Prop() tagsData: string[] | undefined;
+  //用户选择的tag
+  @Prop() readonly value !: string;
+
+  // selectedTags: string = '衣';
+  // 选标签
+  select(tag: string) {
+    const index = this.value.indexOf(tag)
+    if (index >= 0) {
+      return;
+    }
+    // else {
+    //   // this.value = tag
+    // }
+    this.$emit('update:value', tag)
+  };
+  createTag() {
+    const name = window.prompt('请输入标签名')
+    if (name === '') {
+      window.alert('标签名不能为空')
+    } else if (this.tagsData) {
+      this.$emit('update:tagsData', [...this.tagsData, name])
+    }
+    console.log(this.tagsData)
+  };
 
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/style/helper.scss";
+@import "../../assets/style/helper.scss";
 
 .tags {
   display: flex;
@@ -43,7 +68,7 @@ export default class tags extends Vue {
 
     .tagList {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
 
@@ -51,12 +76,12 @@ export default class tags extends Vue {
         // flex-grow: 1;
         background: rgba(153, 153, 153, 0.45);
         $h: 52px;
-        width: 20%;
+        width: 25%;
         border-radius: $h/2;
         line-height: $h;
         text-align: center;
         padding: 0 8px;
-        margin-right: 8px;
+        margin-right: 20px;
         margin-top: 12px;
 
         &.selected {
@@ -69,10 +94,6 @@ export default class tags extends Vue {
         .icon {
           position: relative;
           top: 8px;
-        }
-
-        &:hover {
-          color: $color-highLight;
         }
       }
     }
