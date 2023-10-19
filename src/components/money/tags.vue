@@ -35,7 +35,7 @@ export default class tags extends Vue {
     //   // this.value = tag
     // }
     this.$emit('update:value', tag)
-  };
+  }
   createTag() {
     const name = window.prompt('请输入标签名')
     if (name === '') {
@@ -44,7 +44,7 @@ export default class tags extends Vue {
       this.$emit('update:tagsData', [...this.tagsData, name])
     }
     console.log(this.tagsData)
-  };
+  }
 
 }
 </script>
