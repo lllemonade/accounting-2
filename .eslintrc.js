@@ -1,4 +1,5 @@
 module.exports = {
+  "globals": { "RecordItem": true },
   root: true,
   env: {
     node: true
@@ -25,5 +26,5 @@ module.exports = {
         jest: true
       }
     }
-  ]
+  ],
 }

@@ -8,11 +8,7 @@
       <icon name="money" />
       记账
     </router-link>
-    <router-link
-      class="item"
-      :to="{ name: 'statistics' }"
-      active-class="selected"
-    >
+    <router-link class="item" :to="{ name: 'statistics' }" active-class="selected">
       <icon name="statistic" />
       统计
     </router-link>
@@ -30,8 +26,9 @@ export default {
 
 nav {
   display: flex;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  > .item {
+  box-shadow: 0 0 3px rgba($color: salmon, $alpha: 0.5);
+
+  >.item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,6 +38,7 @@ nav {
     font-size: 12px;
     font-weight: bold;
   }
+
   .item.selected {
     color: $color-highLight;
   }
