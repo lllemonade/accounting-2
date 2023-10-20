@@ -2,26 +2,42 @@
   <div>
     <layOut>
       <ul class="tagList">
-        <li v-for="tag in tagsData" key="tag"><span>{{ tag }}</span>
+        <li v-for="tag in tags" :key="tag"><span>{{ tag }}</span>
           <icon name="arrow-right"></icon>
         </li>
       </ul>
       <div class="createTag">
-        <button>新建标签</button>
+        <button @click=createTag>新建标签</button>
       </div>
     </layOut>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator';
+import Vue from 'vue';
+import tagListModel from '../model/tagListModel';
+import { Component } from 'vue-property-decorator';
+
+
+tagListModel.fetch()
 
 @Component
-export default class label extends Vue {
-  @Prop() tagsData: string[] | undefined;
+export default class labels extends Vue {
+  // @Prop() tagsData: string[] | undefined;
+  tags = tagListModel.data
+  createTag() {
+    const name = window.prompt('请输入标签名')
+    if (name) {
+      const message = tagListModel.create(name)
+      if (message === 'duplicated') {
+        window.alert('标签重复')
+      } else if (message === 'success') {
+        return;
+      }
+    }
 
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -39,10 +55,10 @@ export default class label extends Vue {
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid rgba($color: salmon, $alpha: .35);
-  }
 
-  >.icon {
-    color: salmon;
+    svg {
+      color: salmon;
+    }
   }
 
 }

@@ -31,9 +31,6 @@ export default class tags extends Vue {
     if (index >= 0) {
       return;
     }
-    // else {
-    //   // this.value = tag
-    // }
     this.$emit('update:value', tag)
   }
   createTag() {
