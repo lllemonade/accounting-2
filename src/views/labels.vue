@@ -2,7 +2,7 @@
   <div>
     <layOut>
       <ul class="tagList">
-        <li v-for="tag in tags" :key="tag"><span>{{ tag }}</span>
+        <li v-for="tag in tags" :key="tag.id"><span>{{ tag.name }}</span>
           <icon name="arrow-right"></icon>
         </li>
       </ul>
@@ -35,7 +35,6 @@ export default class labels extends Vue {
         return;
       }
     }
-
   }
 }
 </script>

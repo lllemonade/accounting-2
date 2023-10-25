@@ -1,7 +1,7 @@
 <template>
-  <div>
-
-  </div>
+  <layOut>
+    editLabel页面
+  </layOut>
 </template>
 
 <script lang="ts">
