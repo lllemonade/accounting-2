@@ -7,6 +7,7 @@
           <icon name="arrow-right"></icon>
         </router-link>
       </div>
+
       <div class="createTag">
         <button @click=createTag>新建标签</button>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <layOut>
-    <!-- {{ recordList }} -->
+    {{ recordList }}
     <types :value.sync="record.type"></types>
     <tags :tagsData.sync="tags" :value.sync="record.tags"></tags>
     <notes @update:value="onUpdateNotes" fieldName="备注" placeholder="在这里添加备注"></notes>

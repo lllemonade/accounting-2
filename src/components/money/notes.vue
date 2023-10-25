@@ -3,7 +3,7 @@
   <div>
     <label class="notes">
       <span class="name">{{ fieldName }}</span>
-      <input type="text" v-model.lazy="value" :placeholder="placeholder" />
+      <input type="text" :value="value" @input="onValueChange($event.target.value)" :placeholder="placeholder" />
     </label>
   </div>
 </template>
@@ -14,9 +14,10 @@ import { Component, Watch, Prop } from "vue-property-decorator";
 
 @Component
 export default class notes extends Vue {
-  value = '';
+  @Prop({ default: '' }) readonly value!: string;
   @Prop({ required: true }) fieldName!: string;
   @Prop() placeholder?: string;
+
   @Watch('value')
   onValueChange(value: string) {
     this.$emit('update:value', value)
@@ -29,8 +30,8 @@ export default class notes extends Vue {
   display: flex;
   align-items: center;
   background-color: #f5f5f5;
-  height: 62px;
-  line-height: 62px;
+  height: 58px;
+  line-height: 58px;
   font-size: 14px;
   padding: 0 16px;
 

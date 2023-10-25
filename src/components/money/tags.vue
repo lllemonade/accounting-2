@@ -2,8 +2,9 @@
   <div class="tags">
     <div class="scrollArea">
       <ul class="tagList">
-        <li v-for="tag in tagsData" :key="tag" :class="{ selected: value.indexOf(tag) >= 0 }" @click="select(tag)">
-          {{ tag }}
+        <li v-for="tag in tagsData" :key="tag.id" :class="{ selected: value.indexOf(tag.name) >= 0 }"
+          @click="select(tag.name)">
+          {{ tag.name }}
         </li>
         <li class="new" @click="createTag">
           <icon name="add" />
@@ -24,7 +25,7 @@ export default class tags extends Vue {
   //用户选择的tag
   @Prop() readonly value !: string;
 
-  // selectedTags: string = '衣';
+  // selectedTags: string = '';
   // 选标签
   select(tag: string) {
     const index = this.value.indexOf(tag)
@@ -42,7 +43,6 @@ export default class tags extends Vue {
     }
     console.log(this.tagsData)
   }
-
 }
 </script>
 

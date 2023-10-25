@@ -11,8 +11,9 @@ type tagListModel = {
 const tagListModel: tagListModel = {
   data: [],
   fetch() {
-    // const defaultTagList = [{ id: "衣", name: "衣" }, { id: "食", name: "食" }, { id: "住", name: "住" }, { id: "行", name: "行" }, { id: "彩票", name: "彩票" }]
-    this.data = JSON.parse(window.localStorage.getItem('tagList') || '["衣", "食", "住", "行", "彩票"]');
+    let defaultTagList = [{ id: "衣", name: "衣" }, { id: "食", name: "食" }, { id: "住", name: "住" }, { id: "行", name: "行" }, { id: "彩票", name: "彩票" }]
+    this.data = JSON.parse(window.localStorage.getItem('tagList') || JSON.stringify(defaultTagList));
+    // '["衣", "食", "住", "行", "彩票"]'
     // [{id:"衣",name:"衣"}, {id:"食",name:"食"}, {id:"住",name:"住"},{id:"行",name:"行"}, {id:"彩票",name:"彩票"}]
     return this.data
   },
