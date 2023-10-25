@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class tags extends Vue {
   // 总的tags数组
-  @Prop() tagsData: string[] | undefined;
+  @Prop() readonly tagsData: string[] | undefined;
   //用户选择的tag
   @Prop() readonly value !: string;
 

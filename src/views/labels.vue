@@ -2,8 +2,11 @@
   <div>
     <layOut>
       <ul class="tagList">
-        <li v-for="tag in tags" :key="tag.id"><span>{{ tag.name }}</span>
-          <icon name="arrow-right"></icon>
+        <li v-for="tag in tags" :key="tag.id">
+          <span>{{ tag.name }}</span>
+          <router-link :to="{ name: 'editLabel' }">
+            <icon name="arrow-right"></icon>
+          </router-link>
         </li>
       </ul>
       <div class="createTag">
@@ -19,16 +22,16 @@ import tagListModel from '../model/tagListModel';
 import { Component } from 'vue-property-decorator';
 
 
-tagListModel.fetch()
+tagListModel.fetch();
 
 @Component
 export default class labels extends Vue {
   // @Prop() tagsData: string[] | undefined;
-  tags = tagListModel.data
+  tags = tagListModel.data;
   createTag() {
     const name = window.prompt('请输入标签名')
     if (name) {
-      const message = tagListModel.create(name)
+      const message = tagListModel.create(name);
       if (message === 'duplicated') {
         window.alert('标签重复')
       } else if (message === 'success') {

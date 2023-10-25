@@ -1,15 +1,28 @@
 <template>
   <layOut>
-    editLabel页面
+    this is editLabel
   </layOut>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
+import tagListModel from '@/model/tagListModel';
 
 @Component
 export default class extends Vue {
-
+  created() {
+    const id = this.$route.params.id
+    tagListModel.fetch();
+    const tags = tagListModel.data;
+    const tag = tags.filter(t => t.id === id)[0];
+    if (tag) {
+      console.log(tag)
+    } else {
+      // this.$router.push('/404')
+      this.$router.replace('/404')
+    }
+  }
 }
 </script>
 
