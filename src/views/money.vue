@@ -3,7 +3,7 @@
     <!-- {{ recordList }} -->
     <types :value.sync="record.type"></types>
     <tags :tagsData.sync="tags" :value.sync="record.tags"></tags>
-    <notes @update:value="onUpdateNotes"></notes>
+    <notes @update:value="onUpdateNotes" fieldName="备注" placeholder="在这里添加备注"></notes>
     <number-pad @update:value="onUpdateTotal" @submit="saveRecord"></number-pad>
   </layOut>
 </template>

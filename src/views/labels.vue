@@ -1,14 +1,12 @@
 <template>
   <div>
     <layOut>
-      <ul class="tagList">
-        <li v-for="tag in tags" :key="tag.id">
+      <div class="tagList">
+        <router-link :to="`labels/editLabel/${tag.id}`" v-for="tag in tags" :key="tag.id">
           <span>{{ tag.name }}</span>
-          <router-link :to="{ name: 'editLabel' }">
-            <icon name="arrow-right"></icon>
-          </router-link>
-        </li>
-      </ul>
+          <icon name="arrow-right"></icon>
+        </router-link>
+      </div>
       <div class="createTag">
         <button @click=createTag>新建标签</button>
       </div>
@@ -51,7 +49,7 @@ export default class labels extends Vue {
   flex-direction: column;
   padding: 0 15px;
 
-  li {
+  a {
     display: flex;
     align-content: center;
     justify-content: space-between;
