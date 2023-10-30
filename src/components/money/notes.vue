@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component, Watch, Prop } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class notes extends Vue {

@@ -46,7 +46,8 @@ export default class types extends Vue {
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  background-color: #999;
+  background-color: $color-highLight;
+  color: #fff;
 
   >li {
     display: flex;
@@ -64,7 +65,7 @@ export default class types extends Vue {
       left: 0;
       height: 4px;
       width: 100%;
-      background-color: $color-highLight;
+      background-color: antiquewhite;
     }
   }
 }

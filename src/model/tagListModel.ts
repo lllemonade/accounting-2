@@ -1,3 +1,5 @@
+import createID from '@/lib/createID'
+
 type Tag = {
   id: string;
   name: string;
@@ -25,7 +27,8 @@ const tagListModel: TagListModel = {
     if (names.indexOf(name) >= 0) {
       return 'duplicated';
     }
-    this.data.push({ id: name, name: name });
+    const id = createID().toString()
+    this.data.push({ id: id, name: name });
     this.save();
     return 'success';
   },
@@ -47,12 +50,14 @@ const tagListModel: TagListModel = {
     window.localStorage.setItem('tagList', JSON.stringify(this.data))
   },
   deleteTag(id) {
+    let index = -1
     for (let i = 0; i <= this.data.length; i++) {
       if (this.data[i].id === id) {
-        this.data.splice(i, 1)
+        index = i
         break;
       }
     }
+    this.data.splice(index, 1)
     this.save();
     return true;
   }

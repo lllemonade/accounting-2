@@ -72,9 +72,11 @@ export default class tags extends Vue {
 
       li {
         // flex-grow: 1;
-        background: rgba(153, 153, 153, 0.45);
+        background: transparent;
+        border: 2px solid $color-highLight;
+        color: #000;
         $h: 52px;
-        width: 21%;
+        width: 56px;
         border-radius: $h/2;
         line-height: $h;
         text-align: center;
@@ -91,7 +93,7 @@ export default class tags extends Vue {
       .new {
         .icon {
           position: relative;
-          top: 8px;
+          top: 4px;
         }
       }
     }

@@ -45,7 +45,9 @@ export default class editLabel extends Vue {
   }
   deleteTag() {
     if (this.tag) {
-      tagListModel.deleteTag(this.tag.id)
+      if (tagListModel.deleteTag(this.tag.id)) {
+        this.$router.back()
+      } else { window.alert('删除失败') }
     }
   }
   goBack() {
@@ -56,7 +58,6 @@ export default class editLabel extends Vue {
 
 <style lang="scss" scoped>
 @import "../assets/style/helper.scss";
-
 
 .top_bar {
   position: relative;
