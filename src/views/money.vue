@@ -4,7 +4,8 @@
     <types :value.sync="record.type"></types>
     <tags :tagsData.sync="tags" :value.sync="record.tags"></tags>
     <notes @update:value="onUpdateNotes" fieldName="备注" placeholder="在这里添加备注"></notes>
-    <number-pad @update:value="onUpdateTotal" @submit="saveRecord"></number-pad>
+
+    <number-pad :value.sync="record.total" @submit="saveRecord"></number-pad>
   </layOut>
 </template>
 
@@ -26,12 +27,12 @@ const tagList = tagListModel.fetch()
 
 @Component({ components: { types, notes, numberPad, tags } })
 export default class Money extends Vue {
-  // tags = ['衣', '食', '住', '行', '彩票'];
-  tags = tagList
+  // tags = ['衣', '食', '住', '行'];
+  tags = tagList;
   recordList: RecordItem[] = recordList;
 
   record: RecordItem = {
-    type: 'payOut', tags: '衣', notes: '', total: 0
+    type: 'payOut', tags: ['衣'], notes: '', total: 0
   }
   //用.sync  可以省去这里的方法 tag和type
   // onUpdateType(value: string) {

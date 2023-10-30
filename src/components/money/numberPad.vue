@@ -30,11 +30,14 @@ import { Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class numberPad extends Vue {
-  output = '0';
+  // output = '0';
+  @Prop() readonly value!: number;
+  output = this.value.toString();
   // @Prop() recordList: Record[] = []
+
   inputContent(event: MouseEvent) {
     const button = (event.target as HTMLButtonElement);
-    const input = button.textContent as string;
+    const input = button.textContent!;
     if (this.output.length === 16) { return; }
     if (this.output === '0') {
       if ('0123456789'.indexOf(input) >= 0) {
@@ -44,16 +47,19 @@ export default class numberPad extends Vue {
       }
       return;
     }
-    if (this.output.indexOf('.') > 0 && input === '.') { return; }
+    if (this.output.indexOf('.') >= 0 && input === '.') { return; }
     this.output += input;
   }
   remove() {
     if (this.output.length === 1) {
-      this.output = '0'
+      this.output = '0';
     } else { this.output = this.output.slice(0, -1) }
   }
   add() { }
   min() { }
+  clear() {
+    this.output = '0'
+  }
   ok() {
     this.$emit('update:value', this.output)
     this.$emit('submit', this.output)

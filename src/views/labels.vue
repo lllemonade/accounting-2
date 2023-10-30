@@ -2,7 +2,7 @@
   <div>
     <layOut>
       <div class="tagList">
-        <router-link :to="`labels/editLabel/${tag.id}`" v-for="tag in tags" :key="tag.id">
+        <router-link :to="`/labels/editLabel/${tag.id}`" v-for="tag in tags" :key="tag.id">
           <span>{{ tag.name }}</span>
           <icon name="arrow-right"></icon>
         </router-link>
@@ -27,6 +27,7 @@ tagListModel.fetch();
 export default class labels extends Vue {
   // @Prop() tagsData: string[] | undefined;
   tags = tagListModel.data;
+
   createTag() {
     const name = window.prompt('请输入标签名')
     if (name) {

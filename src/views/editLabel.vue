@@ -1,11 +1,12 @@
 <template>
   <layOut>
     <div class="top_bar">
-      <icon name="arrow-right"></icon>
+      <icon name="arrow-right" @click="goBack"></icon>
       <span>编辑标签</span>
     </div>
-
-    <notes :value="tag.name"></notes>
+    <div>
+      <notes :value="tag.name" @update:value="updateTag($event.target.value)" fieldName="标签名"></notes>
+    </div>
 
     <div class="deleteTag">
       <button @click=deleteTag>删除标签</button>
@@ -14,31 +15,41 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue from 'vue'
 import { Component } from 'vue-property-decorator';
 import tagListModel from '@/model/tagListModel';
 import notes from '@/components/money/notes.vue';
 
 @Component({ components: { notes } })
-export default class extends Vue {
+export default class editLabel extends Vue {
 
   tag?: { id: string, name: string } = undefined;
 
   created() {
-    const id = this.$route.params.id
+    const id = this.$route.params.id;
     tagListModel.fetch();
     const tags = tagListModel.data;
     const tag = tags.filter(t => t.id === id)[0];
     if (tag) {
-      this.tag = tag
+      this.tag = tag;
       console.log(tag)
     } else {
       // this.$router.push('/404')
       this.$router.replace('/404')
     }
-  };
+  }
+  updateTag(name: string) {
+    if (this.tag) {
+      tagListModel.updateTag(this.tag.id, name)
+    }
+  }
   deleteTag() {
-
+    if (this.tag) {
+      tagListModel.deleteTag(this.tag.id)
+    }
+  }
+  goBack() {
+    this.$router.back()
   }
 }
 </script>
@@ -81,4 +92,8 @@ export default class extends Vue {
     border-radius: 10px;
   }
 }
+
+// .wrapper {
+//   margin-top: 12px;
+// }
 </style>

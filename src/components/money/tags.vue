@@ -2,8 +2,8 @@
   <div class="tags">
     <div class="scrollArea">
       <ul class="tagList">
-        <li v-for="tag in tagsData" :key="tag.id" :class="{ selected: value.indexOf(tag.name) >= 0 }"
-          @click="select(tag.name)">
+        <li v-for="tag in tagsData" :key="tag.id" :class="{ selected: selectedTags.indexOf(tag.name) >= 0 }"
+          @click="select(tag)">
           {{ tag.name }}
         </li>
         <li class="new" @click="createTag">
@@ -23,16 +23,17 @@ export default class tags extends Vue {
   // 总的tags数组
   @Prop() readonly tagsData: string[] | undefined;
   //用户选择的tag
-  @Prop() readonly value !: string;
+  // @Prop() readonly value !: string;
+  selectedTags: string[] = ['衣'];
 
-  // selectedTags: string = '';
   // 选标签
   select(tag: string) {
-    const index = this.value.indexOf(tag)
-    if (index >= 0) {
-      return;
-    }
-    this.$emit('update:value', tag)
+    const index = this.selectedTags.indexOf(tag)
+    if (index < 1) {
+      // return;
+      this.$emit('update:value', this.selectedTags);
+    } else return
+
   }
   createTag() {
     const name = window.prompt('请输入标签名')
@@ -73,7 +74,7 @@ export default class tags extends Vue {
         // flex-grow: 1;
         background: rgba(153, 153, 153, 0.45);
         $h: 52px;
-        width: 25%;
+        width: 21%;
         border-radius: $h/2;
         line-height: $h;
         text-align: center;
