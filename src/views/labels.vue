@@ -20,13 +20,10 @@ import Vue from 'vue';
 import tagListModel from '../model/tagListModel';
 import { Component } from 'vue-property-decorator';
 
-
-tagListModel.fetch();
-
 @Component
 export default class labels extends Vue {
   // @Prop() tagsData: string[] | undefined;
-  tags = tagListModel.data;
+  tags = window.tagList;
 
   createTag() {
     const name = window.prompt('请输入标签名')

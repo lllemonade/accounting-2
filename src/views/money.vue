@@ -22,12 +22,11 @@ import tagListModel from '@/model/tagListModel';
 
 //原始数据都从localStroge获取
 const recordList = recordListModel.fetch()
-const tagList = tagListModel.fetch()
 
 @Component({ components: { types, notes, numberPad, tags } })
 export default class Money extends Vue {
   // tags = ['衣', '食', '住', '行'];
-  tags = tagList;
+  tags = window.tagList;
   recordList: RecordItem[] = recordList;
 
   record: RecordItem = {
