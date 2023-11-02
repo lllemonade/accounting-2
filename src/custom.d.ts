@@ -26,4 +26,7 @@ interface Window {
   updateTag: (id: string, name: string) => 'success' | 'not Found' | 'duplicated';
   // updateTage:TagListModel['updateTag']   和TagListModel中的updateTag类型相同
   findTag: (id: string) => Tag | undefined;
+
+  recordList: RecordItem[];
+  createRecord: (record: RecordItem) => void;
 }

@@ -7,6 +7,7 @@ import navBar from './components/navBar.vue'
 import layOut from './components/layOut.vue'
 import icon from './components/icon.vue'
 import tagListModel from './model/tagListModel'
+import recordListModel from './model/recordListModel'
 
 Vue.config.productionTip = false
 
@@ -14,6 +15,13 @@ Vue.component('navBar', navBar)
 Vue.component('layOut', layOut)
 Vue.component('icon', icon)
 
+//recordStore
+window.recordList = recordListModel.fetch();
+window.createRecord = (record: RecordItem) => {
+  recordListModel.create(record)
+}
+
+//tagStore
 window.tagList = tagListModel.fetch();
 window.findTag = (id: string) => {
   return window.tagList.filter(t => t.id === id)[0]

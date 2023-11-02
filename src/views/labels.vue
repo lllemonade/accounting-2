@@ -4,7 +4,7 @@
       <div class="tagList">
         <router-link :to="`/labels/editLabel/${tag.id}`" v-for="tag in tags" :key="tag.id">
           <span>{{ tag.name }}</span>
-          <icon name="arrow-right"></icon>
+          <icon name="arrow-right" />
         </router-link>
       </div>
 
@@ -48,10 +48,6 @@ export default class labels extends Vue {
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid rgba($color: salmon, $alpha: .35);
-
-    svg {
-      color: salmon;
-    }
   }
 
 }

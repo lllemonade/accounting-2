@@ -58,18 +58,18 @@ export default class editLabel extends Vue {
   height: 6vh;
   line-height: 6vh;
 
-  span {
-    color: #fff;
-    font-size: 16px;
-  }
-
   .icon {
     position: absolute;
     left: 10px;
     top: calc(50% - 0.75em);
     rotate: 180deg;
     vertical-align: middle;
+    // color: #fff;
+  }
+
+  span {
     color: #fff;
+    font-size: 16px;
   }
 }
 

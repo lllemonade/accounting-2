@@ -14,19 +14,17 @@ import types from "../components/money/types.vue";
 import notes from "../components/money/notes.vue";
 import numberPad from "../components/money/numberPad.vue";
 import tags from "../components/money/tags.vue";
-import { Component, Watch } from 'vue-property-decorator';
-import recordListModel from '../model/recordListModel'
+import { Component } from 'vue-property-decorator';
 // const { model } = require('../../model.js')
 
 
 //原始数据都从localStroge获取
-const recordList = recordListModel.fetch()
 
 @Component({ components: { types, notes, numberPad, tags } })
 export default class Money extends Vue {
   // tags = ['衣', '食', '住', '行'];
   tags = window.tagList;
-  recordList: RecordItem[] = recordList;
+  recordList = window.recordList;
 
   record: RecordItem = {
     type: 'payOut', tags: ['衣'], notes: '', total: 0
@@ -42,14 +40,7 @@ export default class Money extends Vue {
     this.record.total = parseFloat(value)
   }
   saveRecord() {
-    recordListModel.create(this.record)
-    console.log(this.recordList)
+    window.createRecord(this.record)
   }
-
-  @Watch('recordList')
-  onRecordListChange() {
-    recordListModel.save()
-  }
-
 }
 </script>
