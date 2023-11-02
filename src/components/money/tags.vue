@@ -49,6 +49,7 @@ export default class tags extends Vue {
 
 <style lang="scss" scoped>
 @import "../../assets/style/helper.scss";
+$h: 56px;
 
 .tags {
   display: flex;
@@ -66,34 +67,30 @@ export default class tags extends Vue {
 
     .tagList {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      // justify-content: center;
+      // align-items: center;
       flex-wrap: wrap;
 
       li {
         // flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         background: transparent;
         border: 2px solid $color-highLight;
         color: #000;
-        $h: 52px;
         width: 56px;
-        border-radius: $h/2;
-        line-height: $h;
-        text-align: center;
+        height: $h;
+        border-radius: calc($h / 2);
         padding: 0 8px;
-        margin-right: 20px;
-        margin-top: 12px;
+        margin: 16px 10px 0 10px;
 
         &.selected {
           background-color: $color-highLight;
           color: white;
-        }
-      }
-
-      .new {
-        .icon {
-          position: relative;
-          top: 4px;
         }
       }
     }

@@ -16,7 +16,6 @@ import numberPad from "../components/money/numberPad.vue";
 import tags from "../components/money/tags.vue";
 import { Component, Watch } from 'vue-property-decorator';
 import recordListModel from '../model/recordListModel'
-import tagListModel from '@/model/tagListModel';
 // const { model } = require('../../model.js')
 
 

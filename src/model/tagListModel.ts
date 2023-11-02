@@ -1,4 +1,4 @@
-import createID from '@/lib/createID'
+import createID from '@/lib/createID';
 
 const tagListModel: TagListModel = {
   data: [],
