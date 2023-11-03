@@ -1,7 +1,7 @@
 <template>
   <layOut>
     <types :value.sync="record.type"></types>
-    <tags :tagsData.sync="tags" :value.sync="record.tags"></tags>
+    <tags></tags>
     <notes @update:value="onUpdateNotes" fieldName="备注" placeholder="在这里添加备注"></notes>
 
     <number-pad :value.sync="record.total" @submit="saveRecord"></number-pad>
@@ -24,7 +24,7 @@ import store from '@/store/index2';
 @Component({ components: { types, notes, numberPad, tags } })
 export default class Money extends Vue {
   // tags = ['衣', '食', '住', '行'];
-  tags = store.tagList;
+  // tags = store.tagList;
   recordList = store.recordList;
 
   record: RecordItem = {

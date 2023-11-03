@@ -2,7 +2,7 @@
   <div class="tags">
     <div class="scrollArea">
       <ul class="tagList">
-        <li v-for="tag in tagsData" :key="tag.id" :class="{ selected: selectedTags.indexOf(tag.name) >= 0 }"
+        <li v-for="tag in tagList" :key="tag.id" :class="{ selected: selectedTags.indexOf(tag.name) >= 0 }"
           @click="select(tag.name)">
           {{ tag.name }}
         </li>
@@ -15,13 +15,15 @@
 </template>
 
 <script lang="ts">
+import store from '@/store/index2';
 import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 
 @Component
 export default class tags extends Vue {
   // 总的tags数组
-  @Prop() readonly tagsData: Tag[] | undefined;
+  // @Prop({ required: true }) readonly tagsData?: Tag[];
+  tagList = store.fetchTags()
   //用户选择的tag
   // @Prop() readonly value !: string;
   selectedTags: string[] = ['衣'];
@@ -37,12 +39,11 @@ export default class tags extends Vue {
   }
   createTag() {
     const name = window.prompt('请输入标签名')
-    if (name === '') {
-      window.alert('标签名不能为空')
-    } else if (this.tagsData) {
-      this.$emit('update:tagsData', [...this.tagsData, name])
+    if (!name) {
+      return window.alert('标签名不能为空')
     }
-    console.log(this.tagsData)
+    store.createTag(name)
+    console.log(this.tagList)
   }
 }
 </script>
