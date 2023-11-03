@@ -1,11 +1,11 @@
 <template>
   <layOut>
     <div class="top_bar">
-      <icon name="arrow-right" @click="goBack"></icon>
+      <icon name="arrow-right" @click="goBack" />
       <span>编辑标签</span>
     </div>
     <div>
-      <notes :value="tag.name" @update:value="updateTag($event.target.value)" fieldName="标签名"></notes>
+      <notes :value="tag.name" @update:value="updateTag" fieldName="标签名" placeholder="请输入标签名"></notes>
     </div>
 
     <div class="deleteTag">
@@ -18,12 +18,13 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator';
 import notes from '@/components/money/notes.vue';
+import store from '@/store/index2';
 
 @Component({ components: { notes } })
 export default class editLabel extends Vue {
   tag?: Tag = undefined;
   created() {
-    this.tag = window.findTag(this.$route.params.id);
+    this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       // this.$router.push('/404')
       this.$router.replace('/404')
@@ -31,12 +32,12 @@ export default class editLabel extends Vue {
   }
   updateTag(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name)
+      store.updateTag(this.tag.id, name)
     }
   }
   deleteTag() {
     if (this.tag) {
-      if (window.removeTag(this.tag.id)) {
+      if (store.removeTag(this.tag.id)) {
         this.$router.back()
       } else { window.alert('删除失败') }
     }
@@ -84,8 +85,4 @@ export default class editLabel extends Vue {
     border-radius: 10px;
   }
 }
-
-// .wrapper {
-//   margin-top: 12px;
-// }
 </style>

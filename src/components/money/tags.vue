@@ -3,7 +3,7 @@
     <div class="scrollArea">
       <ul class="tagList">
         <li v-for="tag in tagsData" :key="tag.id" :class="{ selected: selectedTags.indexOf(tag.name) >= 0 }"
-          @click="select(tag)">
+          @click="select(tag.name)">
           {{ tag.name }}
         </li>
         <li class="new" @click="createTag">
@@ -21,7 +21,7 @@ import { Component, Prop } from 'vue-property-decorator'
 @Component
 export default class tags extends Vue {
   // 总的tags数组
-  @Prop() readonly tagsData: string[] | undefined;
+  @Prop() readonly tagsData: Tag[] | undefined;
   //用户选择的tag
   // @Prop() readonly value !: string;
   selectedTags: string[] = ['衣'];

@@ -6,8 +6,6 @@ import store from './store'
 import navBar from './components/navBar.vue'
 import layOut from './components/layOut.vue'
 import icon from './components/icon.vue'
-import tagListModel from './model/tagListModel'
-import recordListModel from './model/recordListModel'
 
 Vue.config.productionTip = false
 
@@ -15,33 +13,36 @@ Vue.component('navBar', navBar)
 Vue.component('layOut', layOut)
 Vue.component('icon', icon)
 
-//recordStore
-window.recordList = recordListModel.fetch();
-window.createRecord = (record: RecordItem) => {
-  recordListModel.create(record)
-}
+// window.store = {
+//   //recordStore
+//   recordList: recordListModel.fetch(),
+//   createRecord: (record: RecordItem) => {
+//     recordListModel.create(record)
+//   },
 
-//tagStore
-window.tagList = tagListModel.fetch();
-window.findTag = (id: string) => {
-  return window.tagList.filter(t => t.id === id)[0]
-}
-window.createTag = (name: string) => {
-  const message = tagListModel.create(name);
-  if (message === 'duplicated') {
-    window.alert('标签重复')
-  } else if (message === 'success') {
-    return;
-  }
-};
+//   //tagStore
+//   tagList: tagListModel.fetch(),
+//   findTag: (id: string) => {
+//     return window.store.tagList.filter(t => t.id === id)[0]
+//   },
+//   createTag: (name: string) => {
+//     const message = tagListModel.create(name);
+//     if (message === 'duplicated') {
+//       alert('标签重复')
+//     } else if (message === 'success') {
+//       return;
+//     }
+//   },
 
-window.removeTag = (id: string) => {
-  return tagListModel.deleteTag(id)
-};
+//   removeTag: (id: string) => {
+//     return tagListModel.deleteTag(id)
+//   },
 
-window.updateTag = (id: string, name: string) => {
-  return tagListModel.updateTag(id, name)
-};
+//   updateTag: (id: string, name: string) => {
+//     return tagListModel.updateTag(id, name)
+//   },
+// }
+
 
 new Vue({
   router,
