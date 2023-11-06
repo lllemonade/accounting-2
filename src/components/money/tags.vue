@@ -15,35 +15,37 @@
 </template>
 
 <script lang="ts">
-import store from '@/store/index2';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator'
 
 @Component
 export default class tags extends Vue {
   // 总的tags数组
-  // @Prop({ required: true }) readonly tagsData?: Tag[];
-  tagList = store.fetchTags()
+  get tagList() {
+    return this.$store.state.tagList;
+  }
   //用户选择的tag
-  // @Prop() readonly value !: string;
   selectedTags: string[] = ['衣'];
-
+  created() {
+    this.$store.commit('fetchTags')
+  }
   // 选标签
   select(tag: string) {
     const index = this.selectedTags.indexOf(tag)
     if (index < 1) {
-      // return;
-      this.$emit('update:value', this.selectedTags);
-    } else return
-
+      // this.$emit('update:value', tag);
+      this.selectedTags.splice(index, 1)
+      this.selectedTags.push(tag)
+      return;
+    }
   }
   createTag() {
     const name = window.prompt('请输入标签名')
     if (!name) {
       return window.alert('标签名不能为空')
     }
-    store.createTag(name)
-    console.log(this.tagList)
+    this.$store.commit('createTag', name)
+    console.log(this.$store.state.tagList)
   }
 }
 </script>

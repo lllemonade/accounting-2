@@ -1,7 +1,7 @@
 <template>
   <layOut>
     <types :value.sync="record.type"></types>
-    <tags></tags>
+    <tags :value.sync="record.tags"></tags>
     <notes @update:value="onUpdateNotes" fieldName="备注" placeholder="在这里添加备注"></notes>
 
     <number-pad :value.sync="record.total" @submit="saveRecord"></number-pad>
@@ -15,18 +15,15 @@ import notes from "../components/money/notes.vue";
 import numberPad from "../components/money/numberPad.vue";
 import tags from "../components/money/tags.vue";
 import { Component } from 'vue-property-decorator';
-import store from '@/store/index2';
 // const { model } = require('../../model.js')
 
 
 //原始数据都从localStroge获取
 
-@Component({ components: { types, notes, numberPad, tags } })
+@Component({
+  components: { types, notes, numberPad, tags }
+})
 export default class Money extends Vue {
-  // tags = ['衣', '食', '住', '行'];
-  // tags = store.tagList;
-  recordList = store.recordList;
-
   record: RecordItem = {
     type: 'payOut', tags: ['衣'], notes: '', total: 0
   }
@@ -34,6 +31,12 @@ export default class Money extends Vue {
   // onUpdateType(value: string) {
   //   this.record.type = value
   // };
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+  created() {
+    this.$store.commit('fetchRecordList')
+  }
   onUpdateNotes(value: string) {
     this.record.notes = value
   }
@@ -41,7 +44,7 @@ export default class Money extends Vue {
     this.record.total = parseFloat(value)
   }
   saveRecord() {
-    store.createRecord(this.record)
+    this.$store.commit('createRecord', this.record)
   }
 }
 </script>

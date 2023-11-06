@@ -18,28 +18,30 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator';
 import notes from '@/components/money/notes.vue';
-import store from '@/store/index2';
 
 @Component({ components: { notes } })
 export default class editLabel extends Vue {
-  tag?: Tag = undefined;
   created() {
-    this.tag = store.findTag(this.$route.params.id);
+    const id = this.$route.params.id
+    this.$store.commit('fetchTags')
+    this.$store.commit('setCurrentTag', id);
     if (!this.tag) {
       // this.$router.push('/404')
       this.$router.replace('/404')
     }
   }
+  get tag() {
+    return this.$store.state.currentTag
+  }
   updateTag(name: string) {
     if (this.tag) {
-      store.updateTag(this.tag.id, name)
+      this.$store.commit('updateTag', { id: this.tag.id, name })
     }
   }
   deleteTag() {
     if (this.tag) {
-      if (store.removeTag(this.tag.id)) {
-        this.$router.back()
-      } else { window.alert('删除失败') }
+      this.$store.commit('removeTag', this.tag.id)
+
     }
   }
   goBack() {

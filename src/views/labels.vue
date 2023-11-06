@@ -17,18 +17,21 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import store from '@/store/index2';
 import { Component } from 'vue-property-decorator';
 
 @Component
 export default class labels extends Vue {
+  get tags() {
+    return this.$store.state.tagList;
+  }
   // @Prop() tagsData: string[] | undefined;
-  tags = store.tagList;
-
+  created() {
+    this.$store.commit('fetchTags')
+  }
   createTag() {
     const name = window.prompt('请输入标签名')
     if (name) {
-      store.createTag(name)
+      this.$store.commit('createTag', name)
     }
   }
 }
