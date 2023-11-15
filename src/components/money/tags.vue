@@ -2,12 +2,13 @@
   <div class="tags">
     <div class="scrollArea">
       <ul class="tagList">
-        <li v-for="tag in tagList" :key="tag.id" :class="{ selected: selectedTags.indexOf(tag.name) >= 0 }"
-          @click="select(tag.name)">
-          {{ tag.name }}
+        <li v-for="tag in tagList" :key="tag.id" @click="select(tag.name)">
+          <span :class="{ selected: selectedTags.indexOf(tag.name) >= 0 }">{{ tag.name }}</span>
         </li>
         <li class="new" @click="createTag">
-          <icon name="add" />
+          <span>
+            <icon name="add" />
+          </span>
         </li>
       </ul>
     </div>
@@ -20,10 +21,14 @@ import { Component } from 'vue-property-decorator'
 
 @Component
 export default class tags extends Vue {
+  isPayOut = true;
   // 总的tags数组
   get tagList() {
     return this.$store.state.tagList;
   }
+  // get tagList2() {
+  //   return this.$store.state.tagList2;
+  // }
   //用户选择的tag
   selectedTags: string[] = ['衣'];
   created() {
@@ -70,30 +75,34 @@ $h: 56px;
 
     .tagList {
       display: flex;
-      // justify-content: center;
-      // align-items: center;
       flex-wrap: wrap;
 
       li {
         // flex-grow: 1;
         display: flex;
         justify-content: center;
-        align-items: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         background: transparent;
-        border: 2px solid $color-highLight;
-        color: #000;
-        width: 56px;
-        height: $h;
-        border-radius: calc($h / 2);
-        padding: 0 8px;
-        margin: 16px 10px 0 10px;
+        width: 25%;
+        margin: 16px 0 0 0;
 
-        &.selected {
-          background-color: $color-highLight;
-          color: white;
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          border: 2px solid $color-highLight;
+          color: #000;
+          width: 56px;
+          height: $h;
+          border-radius: calc($h / 2);
+
+          &.selected {
+            background-color: $color-highLight;
+            color: white;
+          }
+
         }
       }
     }

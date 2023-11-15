@@ -5,7 +5,7 @@
       <span>编辑标签</span>
     </div>
     <div>
-      <notes :value="tag?.name" @update:value="updateTag" fieldName="标签名" placeholder="请输入标签名"></notes>
+      <notes :value="tag?.name" @update:value.lazy="updateTag" fieldName="标签名" placeholder="请输入标签名"></notes>
     </div>
 
     <div class="deleteTag">

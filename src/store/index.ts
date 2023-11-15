@@ -9,12 +9,14 @@ Vue.use(Vuex)
 type RootState = {
   recordList: RecordItem[],
   tagList: Tag[],
+  // tagList2: Tag[],
   currentTag?: Tag,
 }
 const store = new Vuex.Store({
   state: {
     recordList: [],
     tagList: [],
+    // tagList2: [],
     currentTag: undefined,
   } as RootState,
 
@@ -28,12 +30,21 @@ const store = new Vuex.Store({
         { id: "行", name: "行" },
         { id: "彩票", name: "彩票" }
       ]
+      // const defaultTagList2 = [
+      //   { id: "工资", name: "工资" },
+      //   { id: "奖金", name: "奖金" },
+      //   { id: "报销", name: "报销" },
+      //   { id: "理财", name: "理财" },
+      //   { id: "其他", name: "其他" },
+      // ]
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || JSON.stringify(defaultTagList));
+      // state.tagList2 = JSON.parse(window.localStorage.getItem('tagList2') || JSON.stringify(defaultTagList2));
     },
     createTag(state, name: string) {
       const names = state.tagList.map(item => item.name)
       if (names.indexOf(name) > 0) {
         window.alert('标签已经存在')
+        return;
       }
       const id = createID().toString()
       state.tagList.push({ id, name: name });
@@ -49,7 +60,7 @@ const store = new Vuex.Store({
       const idList = state.tagList.map(item => item.id)
       if (idList.indexOf(payload.id) >= 0) {
         const names = state.tagList.map(item => item.name)
-        if (names.indexOf(payload.name) >= 0) {
+        if (names.indexOf(payload.name) > 0) {
           window.alert('标签名重复')
         } else {
           const tag = state.tagList.filter(item => item.id === payload.id)[0]
@@ -81,7 +92,7 @@ const store = new Vuex.Store({
       record2.createAt = new Date();
       state.recordList.push(record2);
       // this.recordList?.push(record2)  //判断data存在才push
-      store.commit('saveRecord')
+      store.commit('saveRecords')
     },
     saveRecords(state) {
       window.localStorage.setItem('recordList', JSON.stringify(state.recordList))

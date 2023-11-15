@@ -35,7 +35,7 @@ nav {
     flex-direction: column;
     width: 33.3%;
     height: 55px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
   }
 
